@@ -2,6 +2,7 @@ package com.xyzcorp;
 
 import org.apache.kafka.common.serialization.Serdes;
 import org.apache.kafka.streams.*;
+import org.apache.kafka.streams.errors.StreamsUncaughtExceptionHandler.*;
 import org.apache.kafka.streams.kstream.*;
 
 import java.time.Duration;
@@ -44,7 +45,10 @@ public class MyStreams {
 
         KafkaStreams streams = new KafkaStreams(topology, props);
 
-        streams.setUncaughtExceptionHandler((t, e) -> e.printStackTrace());
+        streams.setUncaughtExceptionHandler(t -> {
+            t.printStackTrace();
+            return StreamThreadExceptionResponse.SHUTDOWN_CLIENT;
+        });
 
         streams.start();
 

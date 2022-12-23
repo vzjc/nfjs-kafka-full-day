@@ -81,7 +81,7 @@ public class MyProducer {
                 }
             });
 
-            Thread.sleep(random.nextInt(30000 - 1000 + 1) + 1000);
+            Thread.sleep(random.nextInt(3000 - 1000 + 1) + 1000);
         }
     }
 }
